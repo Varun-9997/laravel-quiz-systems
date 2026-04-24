@@ -26,3 +26,7 @@ Route::get('addQuiz',[AdminController::class, 'addQuiz']);
 
 Route::post('addMcq',[AdminController::class, 'addMcqs']);
 
+Route::get('endQuiz',[AdminController::class, 'endQuiz']);
+
+Route::get('showQuiz/{id}',[AdminController::class, 'showQuiz']);
+
