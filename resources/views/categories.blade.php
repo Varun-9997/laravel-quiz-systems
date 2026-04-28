@@ -49,7 +49,10 @@
                             <li>{{$category->id}}</li>
                             <li>{{$category->name}}</li>
                             <li>{{$category->creator}}</li>
-                            <li><a href="category/delete/{{$category->id}}" class="text-red-600 hover:text-red-400">Delete</a></li>
+                            <li class="flex gap-3">
+                            <a href="quizList/{{$category->id}}/{{$category->name}}" class="text-blue-600 hover:text-blue-400">View</a>
+                            <a href="category/delete/{{$category->id}}" class="text-red-600 hover:text-red-400">Delete</a>
+                        </li>
                         </ul>
                     </li>
                 @endforeach

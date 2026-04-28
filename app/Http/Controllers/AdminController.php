@@ -73,12 +73,11 @@ class AdminController extends Controller
     }
 
     function categoryDelete($id){
-        $isDeleted = Category::find($id)->delete();
-        if($isDeleted){
-            Session::flash('category',"Success : Category Deleted.");
-            return redirect("admin-categories");
-        }
-    }
+    Category::findOrFail($id)->delete();
+
+    Session::flash('category', 'Success : Category Deleted.');
+    return redirect('admin-categories');
+}
 
     function addQuiz(){
         $categories = Category::get();
@@ -147,6 +146,16 @@ class AdminController extends Controller
         $admin = Session::get('admin');
         if($admin){
             return view('showQuiz',["name"=>$admin['name'],"mcqs"=> $mcqs]);
+        }else{
+            return redirect('admin-login');
+        }
+    }
+
+    function quizList($id, $category){
+        $quizData = Mcq::where('category_id', $id)->get();
+        $admin = Session::get('admin');
+        if($admin){
+            return view('quizList',["name"=>$admin['name'],"quizData"=> $quizData, "category"=> $category]);
         }else{
             return redirect('admin-login');
         }
