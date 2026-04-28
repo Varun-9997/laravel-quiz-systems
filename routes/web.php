@@ -13,7 +13,13 @@ Route::get('/userQuizList/{id}/{category}',[UserController::class, 'userQuizList
 
 Route::view('/userSignup','userSignup');
 
+Route::view('/userLogin','userLogin');
+
 Route::get('/userSignupQuiz',[UserController::class, 'userSignupQuiz']);
+
+Route::get('/userLoginQuiz',[UserController::class, 'userLoginQuiz']);
+
+Route::post('/userLogin',[UserController::class, 'userLogin']);
 
 Route::post('/userSignup',[UserController::class, 'userSignup']);
 
@@ -42,4 +48,8 @@ Route::get('endQuiz',[AdminController::class, 'endQuiz']);
 Route::get('showQuiz/{id}',[AdminController::class, 'showQuiz']);
 
 Route::get('quizList/{id}/{category}',[AdminController::class, 'quizList']);
+
+Route::get('mcq/{id}/{name}',[UserController::class, 'mcq']);
+
+Route::post('submitNext/{id}',[UserController::class, 'submitAndNext']);
 

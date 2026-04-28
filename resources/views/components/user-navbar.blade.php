@@ -10,7 +10,7 @@
                 <a class="text-gray-500 hover:text-blue-500" href="">Welcome, {{Session('user')['name']}}</a>
             <a class="text-gray-500 hover:text-blue-500" href="/userLogout">Logout</a>
             @else
-            <a class="text-gray-500 hover:text-blue-500" href="">Login</a>
+            <a class="text-gray-500 hover:text-blue-500" href="/userLogin">Login</a>
             <a class="text-gray-500 hover:text-blue-500" href="/userSignup">Signup</a>
                 
             @endif

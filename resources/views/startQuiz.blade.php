@@ -18,13 +18,18 @@
     </h1>
 
     @if (session('user'))
-        <a type="submit" href="" class=" bg-blue-800 rounded-md px-2 py-2 text-white hover:bg-blue-600">
+        <a type="submit" href="/mcq/{{ Session('firstMcq')-> id.'/'. $quizName }}" class=" bg-blue-800 rounded-md px-2 py-2 text-white hover:bg-blue-600">
         Start Quiz
         </a>
         @else
+        <div class=" flex flex-col gap-3">
         <a type="submit" href="/userSignupQuiz" class=" bg-blue-800 rounded-md px-2 py-2 text-white hover:bg-blue-600">
-        Login/Signup for Start Quiz
+        Signup to Start Quiz
         </a>
+        <a type="submit" href="/userLoginQuiz" class=" bg-blue-800 rounded-md px-2 py-2 text-white hover:bg-blue-600">
+        Login to Start Quiz
+        </a>
+        </div>
     @endif
     
   
