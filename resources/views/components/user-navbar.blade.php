@@ -5,9 +5,9 @@
         </div>
         <div class="space-x-4">
             <a class="text-gray-500 hover:text-blue-500" href="/">Home</a>
-            <a class="text-gray-500 hover:text-blue-500" href="/admin-categories">Categories</a>
+            <a class="text-gray-500 hover:text-blue-500" href="/category-list">Categories</a>
             @if (session('user'))
-                <a class="text-gray-500 hover:text-blue-500" href="">Welcome, {{Session('user')['name']}}</a>
+                <a class="text-gray-500 hover:text-blue-500" href="/userDetails">Welcome, {{Session('user')['name']}}</a>
             <a class="text-gray-500 hover:text-blue-500" href="/userLogout">Logout</a>
             @else
             <a class="text-gray-500 hover:text-blue-500" href="/userLogin">Login</a>

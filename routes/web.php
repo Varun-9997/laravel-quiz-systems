@@ -11,9 +11,9 @@ Route::get('/userLogout',[UserController::class, 'userLogout']);
 
 Route::get('/userQuizList/{id}/{category}',[UserController::class, 'userQuizList']);
 
-Route::view('/userSignup','userSignup');
+// Route::view('/userSignup','userSignup');
 
-Route::view('/userLogin','userLogin');
+// Route::view('/userLogin','userLogin');
 
 Route::get('/userSignupQuiz',[UserController::class, 'userSignupQuiz']);
 
@@ -29,27 +29,54 @@ Route::view('admin-login','admin-login');
 
 Route::post('admin-login',[AdminController::class, 'login']);
 
-Route::get('dashboard',[AdminController::class, 'dashboard']);
+Route::get('category-list',[UserController::class,'categories']);
 
-Route::get('admin-categories',[AdminController::class, 'categories']);
+Route::get('certificate',[UserController::class,'certificate']);
 
-Route::get('admin-logout',[AdminController::class, 'logout']);
+Route::get('download-certificate',[UserController::class,'downloadCertificate']);
 
-Route::post('admin-categories',[AdminController::class, 'addCategory']);
+Route::get('userLogin', function(){
+    if(!Session()->has('user')){
+        return view('userLogin');
+    }else{
+        return redirect('/');
+    }
+});
 
-Route::get('category/delete/{id}',[AdminController::class, 'categoryDelete']);
+Route::get('userSignup', function(){
+    if(!Session()->has('user')){
+        return view('userSignup');
+    }else{
+        return redirect('/');
+    }
+});
 
-Route::get('addQuiz',[AdminController::class, 'addQuiz']);
+Route::middleware('checkUserAuth')->group(function(){
+    Route::post('submitNext/{id}',[UserController::class, 'submitAndNext']);
+    Route::get('userDetails',[UserController::class, 'userDetails']);
+    Route::get('mcq/{id}/{name}',[UserController::class, 'mcq']);
+});
 
-Route::post('addMcq',[AdminController::class, 'addMcqs']);
+Route::middleware('checkAdminAuth')->group(function(){
+    Route::get('admin-logout',[AdminController::class, 'logout']);
+    Route::post('addCategories',[AdminController::class, 'addCategory']);
+    Route::get('dashboard',[AdminController::class, 'dashboard']);
+    Route::get('category/delete/{id}',[AdminController::class, 'categoryDelete']);
+    Route::get('admin-categories',[AdminController::class, 'categories']);
+    Route::get('addQuiz',[AdminController::class, 'addQuiz']);
+    Route::post('addMcq',[AdminController::class, 'addMcqs']);
+    Route::get('endQuiz',[AdminController::class, 'endQuiz']);
+    Route::get('showQuiz/{id}',[AdminController::class, 'showQuiz']);
+    Route::get('quizList/{id}/{category}',[AdminController::class, 'quizList']);
+});
 
-Route::get('endQuiz',[AdminController::class, 'endQuiz']);
+Route::get('quiz-search',[UserController::class,'quizSearch']);
 
-Route::get('showQuiz/{id}',[AdminController::class, 'showQuiz']);
+Route::view('user-forgot-password', 'user-forgot-password');
 
-Route::get('quizList/{id}/{category}',[AdminController::class, 'quizList']);
+Route::post('user-forgot-password',[UserController::class, 'userForgotPassword']);
 
-Route::get('mcq/{id}/{name}',[UserController::class, 'mcq']);
+Route::post('user-set-forgot-password',[UserController::class, 'userSetForgotPassword']);
 
-Route::post('submitNext/{id}',[UserController::class, 'submitAndNext']);
+Route::get('user-forgot-password/{email}',[UserController::class, 'userResetForgotPassword']);
 
